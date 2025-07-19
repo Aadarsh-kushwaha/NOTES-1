@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        
+ <h1>Validations </h1>
+
+1)
+We have used joi an npm package to maintain the form validations. 
+ Const Joi = require(“joi”);
+
+
+All the constrains and the limits are been defined in the form of the object as : 
+module.exports.listingSchema = Joi.object({
+  listing: Joi.object({
+    title: Joi.string().required(
+    description: Joi.string().required(),
+    location: Joi.string().required(),
+    country: Joi.string().required(),
+    price: Joi.number().required().min(0),
+    image: Joi.object({
+      url: Joi.string().uri().required()
+    }).required()
+  }).required()
+});
+
+2)
+In the url field uri means that the url is entered is in the form of a url only 
+
+uri() ka matlab:
+•	Ye check karta hai ki string ek valid URL format mein hai ya nahi.
+•	URI ka full form hota hai: Uniform Resource Identifier
+•	Practically, uri() ensure karta hai ki value aise dikhe:
+o	https://example.com
+o	http://mysite.net/image.jpg
+o	ftp://abc.xyz
+o	etc.
+
+
+
+</body>
+</html>
