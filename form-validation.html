@@ -10,6 +10,7 @@
         
  <h1>Validations </h1>
 
+    
 1)
 We have used joi an npm package to maintain the form validations. 
  Const Joi = require(“joi”);
@@ -46,5 +47,38 @@ o	etc.
 
 
 
+    Yeh joi ki function banane k bad ham usko app.js me require krenge 
+
+const {listingSchema , reviewSchema}= require("./schema.js")
+
+    require krne k bad ham usko app.post api k andar pass kr denge  k andar pass kr denge as a name of the function as 
+
+  Ek middleware banayenge jo ki check krega ki bhaii hamara data sahi kam kr rha hai ya nahii krke   
+// Route to server side validation for  the listing form 
+const validateListing= (req,res,next)=>{
+  const {error} = listingSchema.validate(req.body);
+     if (error) {
+    const msg = error.details.map(el => el.message).join(', ');
+    throw new ExpressError(400, msg);
+  } 
+    else{
+        next();
+    } 
+}
+
+
+    middleware banane k bad ham usko apne POST api k andar paass kr denge 
+
+
+// POST route
+app.post("/listings", validateListing, wrapAsync(async (req, res) => {
+  const newListing = new Listing(req.body.listing);
+  await newListing.save();
+  res.redirect("/listings");
+}));
+
+
+
+    
 </body>
 </html>
